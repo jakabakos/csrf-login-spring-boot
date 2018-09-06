@@ -1,0 +1,72 @@
+input[type=text], input[type=password], select, textarea {
+	width: 100%;
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-bottom: 15px;
+	resize: vertical;
+}
+
+input[type=submit] {
+	background-color: #4CAF50;
+	color: white;
+	padding: 15px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	width: 100px;
+}
+
+input[type=submit]:hover {
+	background-color: #45a049;
+}
+
+.container {
+	border-radius: 5px;
+	background-color: #f2f2f2;
+	padding: 20px;
+}
+
+body {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.header, .marketing, .footer {
+	padding-right: 15px;
+
+}
+
+.header {
+	padding-bottom: 20px;
+	border-bottom: 1px solid #e5e5e5;
+	margin-bottom: 20px;
+}
+
+.header h3 {
+	margin-top: 0;
+	margin-bottom: 0;
+	line-height: 40px;
+	font-family: Poppins-Bold;
+}
+
+.container-narrow>hr {
+	margin: 30px 0;
+}
+
+.marketing {
+	margin: 40px 0;
+}
+
+.marketing p+h4 {
+	margin-top: 28px;
+}
+
+p.alert {
+	border-radius: 5px;
+	background-color: #FF0000;
+	padding: 15px;
+	color: white;
+}
+
