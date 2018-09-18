@@ -1,7 +1,6 @@
 package org.avatao.springcsrf.config;
 
 
-import org.avatao.springcsrf.AuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
@@ -13,32 +12,37 @@ import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private SecurityProperties securityProperties;
 
+    /**
+     * A HTTP kapcsolat biztonságáért felelős, a különböző oldalak elérésének jogosultságait kezeli 
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .anyRequest().fullyAuthenticated()
-            .and().formLogin().loginPage("/login").failureUrl("/login?error").permitAll()
-            .and().logout().permitAll()
-            .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
-;
-
-        if (securityProperties.isEnableCsrf()) {
-            http.addFilterAfter(new AuthenticationFilter(), CsrfFilter.class);
-        } else {
-            http.csrf().disable();
-        }
+            .anyRequest().fullyAuthenticated() //Bármilyen lekérés autentikációhoz kötött [kiv.-ek mindjárt]
+            .and().formLogin().loginPage("/login") //definiáljuk az (alapértelmezett) loginpage nézetet
+            	.failureUrl("/login?error").permitAll() //hibás bejelentkezés esetén - mindenkinek engedélyezett
+            .and().logout().permitAll() //a kijelentkezés mindenkinek engedélyezett
+            .and().logout()
+            	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            	.logoutSuccessUrl("/login"); //kijelentkezés után ide dob
     }
 
-    @Override
+    /**
+     * Itt a felhasználókat lehet definiálni, illetve azoknak a jogosultságát, szerepköreit, stb.
+     * Ezt lehet akár adatbázisból is kikérni, mert a AuthenticationManagerBuilder biztosít API-t hozzá, 
+     * most explicit definiáljuk, mert a feladat ezt nem igényelte, így belső memóriába írtuk bele.
+     */
+    @Override 
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("admin").password("admin").roles("ADMIN", "USER");
+        auth.inMemoryAuthentication() 
+                .withUser("admin")
+                .password("admin")
+                .roles("ADMIN", "USER");
     }
 
 }

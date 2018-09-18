@@ -7,9 +7,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-    @Override
+	@Override
+	/**
+	 * Ez a metódus rámappeli az URL-t a view-ra, így nincs szükség külön controller osztályra.
+	 */
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("login");
+       registry.addViewController("/login").setViewName("login");
     }
 
 }

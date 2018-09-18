@@ -24,24 +24,16 @@ public class HomeController {
     	return "home";
     }
     
-    
     @RequestMapping("/with-token")
     public String withToken() {
         return "home-with-token";
     }
 
     @RequestMapping(value = "/post", method = POST)
-    @ResponseBody
+    @ResponseBody 
     public String post() {
         logger.info("/post called: successful");
         return "A private POST was successful";
     }
 
-    @RequestMapping(value = "/upload", method = POST)
-    @ResponseBody
-    public String upload(@RequestParam("file") MultipartFile file) {
-        logger.info("/upload called: file {} uploaded", file.getOriginalFilename());
-        return String.format("Upload of %s was successful", file.getOriginalFilename());
-    }
-    
 }

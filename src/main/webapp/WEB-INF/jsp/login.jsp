@@ -6,19 +6,14 @@
     <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
    	<link rel="stylesheet" href="css/formstyle.css">
-  
 </head>
 <body onload="document.f.username.focus();">
 <div class="container">
     
     <div class="header clearfix">
      <h2>CSRF Login</h2>
-<%--         <c:if test="${param.logout != null}">  --%>
-<!--         //!= null?? -->
-<!--         <p class="alert">You have been logged out</p> -->
-<%--         </c:if> --%>
         	 <c:if test="${param.error != null}">
-             <p class="alert alert-error">The username and/or the password is not correct. Please, please try again!</p>
+             <p class="alert alert-error">The username and/or the password is not correct. Please try again!</p>
         </c:if>
 	</div>
 	<div class="content">
